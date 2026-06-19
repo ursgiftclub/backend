@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "development") {
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://client-gm91.vercel.app",
+  "https://client-gm9l.vercel.app",
 ];
 
 app.use(
