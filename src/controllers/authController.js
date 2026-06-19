@@ -123,13 +123,12 @@ export const loginUser = async (req, res) => {
     // Token
     const token = generateToken(user._id);
 
-    // Cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
+   res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+});
 
     res.status(200).json({
       success: true,
