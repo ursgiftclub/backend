@@ -68,6 +68,13 @@ app.use("/api/address", addressRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payments", paymentRoutes);
 
+app.get("/debug-cookie", (req, res) => {
+  res.json({
+    cookies: req.cookies,
+    headersCookie: req.headers.cookie,
+  });
+});
+
 app.use(errorMiddleware);
 
 export default app;
