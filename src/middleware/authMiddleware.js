@@ -6,6 +6,8 @@ import User from "../models/User.js";
 // ===================================
 export const protect = async (req, res, next) => {
   try {
+    console.log("Cookies:", req.cookies);
+    console.log("Header Cookie:", req.headers.cookie);
     let token;
 
     // Get token from cookies
