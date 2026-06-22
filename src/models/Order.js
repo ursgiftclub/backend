@@ -169,6 +169,12 @@ const orderSchema = new mongoose.Schema(
       phone: String,
     },
 
+    guestAccessToken: {
+      type: String,
+      default: "",
+      index: true,
+    },
+
     items: {
       type: [orderItemSchema],
       required: true,

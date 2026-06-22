@@ -223,3 +223,29 @@ export const getOrderById = asyncHandler(async (req, res) => {
     order,
   });
 });
+
+export const getGuestOrderById = asyncHandler(async (req, res) => {
+  const { token } = req.query;
+
+  if (!token) {
+    throw new AppError("Access token missing", 401);
+  }
+
+  const order = await Order.findOne({
+    _id: req.params.id,
+
+    user: null,
+
+    guestAccessToken: token,
+  });
+
+  if (!order) {
+    throw new AppError("Order not found", 404);
+  }
+
+  res.status(200).json({
+    success: true,
+
+    order,
+  });
+});
