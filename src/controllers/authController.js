@@ -42,17 +42,10 @@ export const registerUser = async (req, res) => {
     // Generate token
     const token = generateToken(user._id);
 
-    // Cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
-
     res.status(201).json({
       success: true,
       message: "Registration successful",
+      token,
 
       user: {
         _id: user._id,
@@ -123,16 +116,10 @@ export const loginUser = async (req, res) => {
     // Token
     const token = generateToken(user._id);
 
-   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 30 * 24 * 60 * 60 * 1000,
-});
-
     res.status(200).json({
       success: true,
       message: "Login successful",
+      token,
 
       user: {
         _id: user._id,
@@ -155,11 +142,6 @@ export const loginUser = async (req, res) => {
 // Logout User
 // ==========================
 export const logoutUser = async (req, res) => {
-  res.cookie("token", "", {
-    expires: new Date(0),
-    httpOnly: true,
-  });
-
   res.status(200).json({
     success: true,
     message: "Logout successful",
