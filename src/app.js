@@ -27,11 +27,22 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // CORS
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://client-gm9l.vercel.app",
+];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      callback(new Error("CORS not allowed"));
+    },
     credentials: true,
-  }),
+  })
 );
 
 // Body Parser
